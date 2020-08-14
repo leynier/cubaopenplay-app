@@ -27,10 +27,13 @@ dependencies:
   hive_flutter: ^0.3.1
   get_it: ^4.0.4
   rxdart: ^0.24.1
+  json_annotation: ^3.0.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.5
   flutter_native_splash: ^0.1.9
+  build_runner: ^1.0.0
+  json_serializable: ^3.3.0
 
 flutter:
   uses-material-design: true
