@@ -22,6 +22,11 @@ dependencies:
   url_launcher: ^5.5.0
   transparent_image: ^1.0.0
   share: ^0.6.4+3
+  flutter_bloc: ^6.0.1
+  hive: ^1.4.3
+  hive_flutter: ^0.3.1
+  get_it: ^4.0.4
+  rxdart: ^0.24.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.5
