@@ -1,31 +1,24 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'dart:developer';
+
+import 'package:cubaopenplay/src/api/api.dart';
 import 'package:cubaopenplay/src/app.dart';
 import 'package:cubaopenplay/src/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = SimpleBlocObserver();
+  await DataManager.init();
+  Api.init();
+  setupDependencies();
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class SimpleBlocObserver extends BlocObserver {
   @override
-  Widget build(BuildContext context) {
-    return ThemeProvider(
-      initTheme: AppTheme.dark,
-      child: Builder(
-        builder: (BuildContext context) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: Constants.appName,
-            theme: ThemeProvider.of(context),
-            home: App(),
-            localizationsDelegates: GlobalMaterialLocalizations.delegates,
-            supportedLocales: [const Locale('es')],
-
-          );
-        },
-      ),
-    );
+  onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    log(transition.toString());
   }
 }

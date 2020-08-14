@@ -1,4 +1,5 @@
 import 'package:apklis_api/models/apklis_item_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cubaopenplay/src/pages/pages.dart';
 import 'package:cubaopenplay/src/utils/utils.dart';
 import 'package:cubaopenplay/src/widgets/widgets.dart';
@@ -56,7 +57,9 @@ class DetailsPage extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => ImageView(
                       'img_${app.packageName}',
-                      imageProvider: NetworkImage(app.lastRelease.icon),
+                      imageProvider: CachedNetworkImageProvider(
+                        app.lastRelease.icon,
+                      ),
                     ),
                   ),
                 );
@@ -66,7 +69,12 @@ class DetailsPage extends StatelessWidget {
                   tag: 'img_${app.packageName}',
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(app.lastRelease.icon),
+                    child: FadeInImage(
+                      placeholder: MemoryImage(kTransparentImage),
+                      image: CachedNetworkImageProvider(
+                        app.lastRelease.icon,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -183,9 +191,11 @@ class DetailsPage extends StatelessWidget {
                   width: 100,
                   child: Hero(
                     tag: 'img_${app.packageName}_${screenshot.image}',
-                    child: FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: screenshot.image,
+                    child: FadeInImage(
+                      placeholder: MemoryImage(kTransparentImage),
+                      image: CachedNetworkImageProvider(
+                        screenshot.image,
+                      ),
                     ),
                   ),
                 ),
@@ -196,7 +206,7 @@ class DetailsPage extends StatelessWidget {
                       builder: (context) => GalleryView(
                         initialIndex: index,
                         imageProviders: app.lastRelease.screenshots
-                            .map((e) => NetworkImage(e.image))
+                            .map((e) => CachedNetworkImageProvider(e.image))
                             .toList(),
                         tags: app.lastRelease.screenshots
                             .map(
