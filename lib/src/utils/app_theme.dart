@@ -6,10 +6,12 @@ class AppTheme {
   static final ThemeData light = ThemeData(
     brightness: Brightness.light,
     accentColor: Colors.red,
+    toggleableActiveColor: Colors.red,
   );
   static final ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     accentColor: Colors.blue.withOpacity(0.75),
+    toggleableActiveColor: Colors.blue.withOpacity(0.75),
   );
 
   static AppThemeType getThemeType(String name) {

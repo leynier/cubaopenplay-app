@@ -26,73 +26,59 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(40, 15, 25, 10),
+              ThemeSwitcher(
+                builder: (context) {
+                  return ListTile(
+                    title: Container(
+                      margin: EdgeInsets.only(left: 30),
                       child: Text(
                         'Claro',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          fontSize: 14,
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: ThemeSwitcher(
-                      builder: (context) {
-                        return RadioListTile(
-                          value: AppThemeType.light,
-                          groupValue: DataManager.appTheme,
-                          activeColor: Theme.of(context).accentColor,
-                          onChanged: (value) {
-                            DataManager.appTheme = value;
-                            ThemeSwitcher.of(context).changeTheme(
-                              theme: DataManager.appTheme.theme,
-                            );
-                          },
-                        );
-                      },
+                    trailing: Radio(
+                      value: AppThemeType.light,
+                      groupValue: DataManager.appTheme,
+                      onChanged: (_) {},
                     ),
-                  ),
-                ],
+                    onTap: () {
+                      DataManager.appTheme = AppThemeType.light;
+                      ThemeSwitcher.of(context).changeTheme(
+                        theme: DataManager.appTheme.theme,
+                      );
+                    },
+                  );
+                },
               ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(40, 15, 25, 10),
+              ThemeSwitcher(
+                builder: (context) {
+                  return ListTile(
+                    title: Container(
+                      margin: EdgeInsets.only(left: 30),
                       child: Text(
                         'Oscuro',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          fontSize: 14,
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: ThemeSwitcher(
-                      builder: (context) {
-                        return RadioListTile(
-                          value: AppThemeType.dark,
-                          groupValue: DataManager.appTheme,
-                          activeColor: Theme.of(context).accentColor,
-                          onChanged: (value) {
-                            DataManager.appTheme = value;
-                            ThemeSwitcher.of(context).changeTheme(
-                              theme: DataManager.appTheme.theme,
-                            );
-                          },
-                        );
-                      },
+                    trailing: Radio(
+                      value: AppThemeType.dark,
+                      groupValue: DataManager.appTheme,
+                      onChanged: (_) {},
                     ),
-                  ),
-                ],
+                    onTap: () {
+                      DataManager.appTheme = AppThemeType.dark;
+                      ThemeSwitcher.of(context).changeTheme(
+                        theme: DataManager.appTheme.theme,
+                      );
+                    },
+                  );
+                },
               ),
               Divider(),
             ],
