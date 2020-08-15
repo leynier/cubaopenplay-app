@@ -40,6 +40,19 @@ class HomePage extends StatelessWidget {
                     padding: EdgeInsets.all(20),
                   ),
                 ),
+                ListTile(
+                  title: Text('Configuraciones'),
+                  leading: Icon(Icons.settings),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SettingsPage(),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
             Align(
