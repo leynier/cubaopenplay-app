@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cubaopenplay/src/blocs/blocs.dart';
 import 'package:cubaopenplay/src/pages/pages.dart';
 import 'package:cubaopenplay/src/utils/utils.dart';
+import 'package:cubaopenplay/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,6 +48,19 @@ class HomePage extends StatelessWidget {
                     child: Image.asset(Constants.appLogo),
                     padding: EdgeInsets.all(20),
                   ),
+                ),
+                ListTile(
+                  title: Text('Solicitar Inclusión'),
+                  leading: Icon(Icons.add_circle),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InclusionRequestPage(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   title: Text('Configuraciones'),

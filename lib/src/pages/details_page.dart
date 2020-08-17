@@ -1,6 +1,5 @@
 import 'package:apklis_api/models/apklis_item_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cubaopenplay/src/pages/pages.dart';
 import 'package:cubaopenplay/src/utils/utils.dart';
 import 'package:cubaopenplay/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';

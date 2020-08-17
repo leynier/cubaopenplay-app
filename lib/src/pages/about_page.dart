@@ -84,7 +84,14 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => InclusionRequestPage(),
+                    ),
+                  );
+                },
               ),
             ),
             Container(
