@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatelessWidget {
+  final showDialogToDonate;
+
+  const App(this.showDialogToDonate);
+
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
@@ -15,7 +19,7 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: Constants.appName,
             theme: ThemeProvider.of(context),
-            home: HomePage(),
+            home: HomePage(showDialogToDonate),
             localizationsDelegates: GlobalMaterialLocalizations.delegates,
             supportedLocales: [const Locale('es')],
           );

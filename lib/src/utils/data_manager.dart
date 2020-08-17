@@ -106,4 +106,10 @@ class DataManager {
     _cache = value;
     hideBox.put(_cache_key, jsonEncode(value.toJson()));
   }
+
+  static const _count_key = 'count';
+
+  static int get count => hideBox.get(_count_key, defaultValue: 0);
+
+  static set count(int value) => hideBox.put(_count_key, value);
 }

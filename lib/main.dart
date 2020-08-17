@@ -12,7 +12,15 @@ void main() async {
   await DataManager.init();
   Api.init();
   setupDependencies();
-  runApp(App());
+  var showDialogToDonate = getShowDialogToDonate();
+  runApp(App(showDialogToDonate));
+}
+
+bool getShowDialogToDonate() {
+  ++DataManager.count;
+  return [5, 50, 100, 200, 350, 500]
+      .where((x) => x == DataManager.count)
+      .isNotEmpty;
 }
 
 class SimpleBlocObserver extends BlocObserver {

@@ -12,6 +12,10 @@ import 'package:get_it/get_it.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatelessWidget {
+  final showDialogToDonate;
+
+  const HomePage(this.showDialogToDonate);
+
   Widget buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
@@ -39,6 +43,19 @@ class HomePage extends StatelessWidget {
                     child: Image.asset(Constants.appLogo),
                     padding: EdgeInsets.all(20),
                   ),
+                ),
+                ListTile(
+                  title: Text('Donar'),
+                  leading: Icon(Icons.card_giftcard),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DonatePage(),
+                      ),
+                    );
+                  },
                 ),
                 ListTile(
                   title: Text('Configuraciones'),
@@ -93,7 +110,7 @@ class HomePage extends StatelessWidget {
           child: Scaffold(
             appBar: buildAppBar(context),
             drawer: buildDrawer(context),
-            body: HomeWidget(),
+            body: HomeWidget(showDialogToDonate),
           ),
         ),
       ),
@@ -102,12 +119,17 @@ class HomePage extends StatelessWidget {
 }
 
 class HomeWidget extends StatefulWidget {
+  final showDialogToDonate;
+
+  const HomeWidget(this.showDialogToDonate);
+
   @override
   HomeWidgetState createState() => HomeWidgetState();
 }
 
 class HomeWidgetState extends State<HomeWidget> {
   Completer<void> refreshCompleter;
+  var firstTime = true;
 
   @override
   void initState() {
@@ -130,6 +152,56 @@ class HomeWidgetState extends State<HomeWidget> {
         if (state is CorrectAppsState || state is ErrorAppsState) {
           refreshCompleter?.complete();
           refreshCompleter = Completer();
+        }
+        if (state is CorrectAppsState) {
+          if (firstTime && widget.showDialogToDonate) {
+            firstTime = false;
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Donar'),
+                  content: Container(
+                    child: Text(
+                      'Esta aplicación es gratuita y lo seguirá siendo. La '
+                      'intención es dar a conocer las aplicaciones cubanas de '
+                      'código abierto.\n\n'
+                      'Si lo desea, puede ayudar a que el proyecto siga '
+                      'creciendo realizando una donación. Cualquier '
+                      'contribución, por pequeña que sea, nos permitirá '
+                      'dedicarle más tiempo y recursos a la aplicación.\n\n'
+                      'Muchas gracias de antemano.',
+                    ),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text('No donar'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    FlatButton(
+                      child: Text(
+                        'Donar',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DonatePage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         }
       },
       builder: (BuildContext context, AppsState state) {
