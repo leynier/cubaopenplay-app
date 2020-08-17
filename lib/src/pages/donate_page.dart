@@ -3,21 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DonatePage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final keyForm = GlobalKey<FormState>();
-  final keyController = TextEditingController();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final formKey = GlobalKey<FormState>();
+  final controller = TextEditingController();
 
   void _showSnackBar(String text) {
-    SnackBar snackBar = new SnackBar(content: Text(text));
-    _scaffoldKey.currentState.showSnackBar(snackBar);
+    SnackBar snackBar = SnackBar(content: Text(text));
+    scaffoldKey.currentState.showSnackBar(snackBar);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         appBar: AppBar(
           title: Text('Donar'),
           centerTitle: true,
@@ -57,13 +56,13 @@ class DonatePage extends StatelessWidget {
               ),
             ),
             Form(
-              key: keyForm,
+              key: formKey,
               child: Column(
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.fromLTRB(20, 0, 20, 15),
                     child: TextFormField(
-                      controller: keyController,
+                      controller: controller,
                       keyboardType: TextInputType.number,
                       maxLength: 4,
                       obscureText: true,
@@ -92,7 +91,7 @@ class DonatePage extends StatelessWidget {
                         Expanded(
                           child: FlatButton(
                             onPressed: () async {
-                              if (!keyForm.currentState.validate()) {
+                              if (!formKey.currentState.validate()) {
                                 return;
                               }
                               await showDialog(
@@ -132,14 +131,16 @@ class DonatePage extends StatelessWidget {
                             },
                             child: Container(
                               padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                              child: Text('Transferir'),
+                              child: Text(
+                                'Transferir',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
+                            color: Theme.of(context).accentColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
                             ),
                           ),
                         ),
@@ -178,14 +179,16 @@ class DonatePage extends StatelessWidget {
                       },
                       child: Container(
                         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        child: Text('Llamar al 52642266'),
+                        child: Text(
+                          'Llamar al 52642266',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
+                      color: Theme.of(context).accentColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(
-                          color: Colors.white,
-                          width: 2,
-                        ),
                       ),
                     ),
                   ),
@@ -216,32 +219,38 @@ class DonatePage extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-              child: Center(
-                child: Text(
-                  '9224959879396073',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+              child: GestureDetector(
+                child: Center(
+                  child: Text(
+                    '9224959879396073',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
+                onTap: () {
+                  Clipboard.setData(ClipboardData(text: '9224959879396073'));
+                  _showSnackBar('Cuenta bancaria copiada');
+                },
               ),
             ),
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 10),
               child: FlatButton(
+                color: Theme.of(context).accentColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(
-                    color: Colors.white,
-                    width: 2,
-                  ),
                 ),
                 child: Container(
                   padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
                   child: Text(
                     'Copiar número de la cuenta',
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 onPressed: () {
@@ -273,31 +282,46 @@ class DonatePage extends StatelessWidget {
                             'Enzona',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/images/qr_enzona.png',
-                            fit: BoxFit.fill,
+                        GestureDetector(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              'assets/images/qr_enzona.png',
+                              fit: BoxFit.fill,
+                            ),
                           ),
+                          onTap: () async {
+                            var uri = Uri(
+                              scheme: 'https',
+                              path:
+                                  'raw.githubusercontent.com/cubaopenplay/cubaopenplay-app/master/assets/images/qr_enzona.png',
+                            );
+                            if (await canLaunch(uri.toString())) {
+                              await launch(uri.toString());
+                            } else {
+                              throw 'Could not launch $uri';
+                            }
+                          },
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 15),
                           child: FlatButton(
+                            color: Theme.of(context).accentColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
                             ),
                             child: Container(
                               padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
                               child: Text(
                                 'Descargar',
                                 textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             onPressed: () async {
@@ -330,31 +354,46 @@ class DonatePage extends StatelessWidget {
                             'Transfermovil',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/images/qr_transfermovil.png',
-                            fit: BoxFit.fill,
+                        GestureDetector(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              'assets/images/qr_transfermovil.png',
+                              fit: BoxFit.fill,
+                            ),
                           ),
+                          onTap: () async {
+                            var uri = Uri(
+                              scheme: 'https',
+                              path:
+                                  'raw.githubusercontent.com/cubaopenplay/cubaopenplay-app/master/assets/images/qr_transfermovil.png',
+                            );
+                            if (await canLaunch(uri.toString())) {
+                              await launch(uri.toString());
+                            } else {
+                              throw 'Could not launch $uri';
+                            }
+                          },
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 15),
                           child: FlatButton(
+                            color: Theme.of(context).accentColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
-                              side: BorderSide(
-                                color: Colors.white,
-                                width: 2,
-                              ),
                             ),
                             child: Container(
                               padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
                               child: Text(
                                 'Descargar',
                                 textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             onPressed: () async {
