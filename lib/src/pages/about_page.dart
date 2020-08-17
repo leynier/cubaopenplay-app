@@ -1,8 +1,6 @@
 import 'package:cubaopenplay/src/pages/pages.dart';
 import 'package:cubaopenplay/src/utils/utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -151,19 +149,12 @@ class AboutPage extends StatelessWidget {
                 ),
                 child: Container(
                   padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'TELEGRAM',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(width: 5),
-                      Icon(FontAwesomeIcons.telegramPlane),
-                    ],
+                  child: Text(
+                    'TELEGRAM',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 onPressed: () async {

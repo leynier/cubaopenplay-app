@@ -34,7 +34,6 @@ class DonatePage extends StatelessWidget {
                 'por pequeña que sea, nos permitirá dedicarle más tiempo y '
                 'recursos a la aplicación.\n\n'
                 'Muchas gracias de antemano.',
-                textAlign: TextAlign.justify,
               ),
             ),
             Container(
@@ -156,7 +155,6 @@ class DonatePage extends StatelessWidget {
                 child: Text(
                   'Si no recuerda su clave puede llamar al número 52642266 '
                   'para recuperar su clave de transferencia.',
-                  textAlign: TextAlign.justify,
                 ),
               ),
             ),
@@ -214,7 +212,6 @@ class DonatePage extends StatelessWidget {
                 'utilizar las vías tradicionales (Transferencia mediante '
                 'un cajero automático o desde un banco hacia la cuenta '
                 'que aparece a continación)',
-                textAlign: TextAlign.justify,
               ),
             ),
             Container(
@@ -265,7 +262,6 @@ class DonatePage extends StatelessWidget {
                 'Si sabe como utilizar los QR de Enzona y/o Transfermovil '
                 'también puede utilizar los QR a continuación para realizar '
                 'la donación.',
-                textAlign: TextAlign.justify,
               ),
             ),
             Row(
