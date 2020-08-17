@@ -8,9 +8,12 @@ import 'package:cubaopenplay/src/pages/pages.dart';
 import 'package:cubaopenplay/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
+import 'package:package_info/package_info.dart';
 import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   final showDialogToDonate;
@@ -76,6 +79,7 @@ class HomePage extends StatelessWidget {
                   title: Text('Compatir'),
                   leading: Icon(Icons.share),
                   onTap: () {
+                    Navigator.of(context).pop();
                     Share.share(
                       'Cuba Open Play es un proyecto para divulgar e '
                       'insentivar el desarrollo de aplicaciones cubanas de '
@@ -85,6 +89,19 @@ class HomePage extends StatelessWidget {
                       '\n\n'
                       'Play Store: https://play.google.com/store/apps/details?id=com.codestrange.cubaopenplay',
                     );
+                  },
+                ),
+                ListTile(
+                  title: Text('Telegram'),
+                  leading: Icon(FontAwesomeIcons.telegramPlane),
+                  onTap: () async {
+                    Navigator.of(context).pop();
+                    const url = 'https://t.me/cubaopenplay';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
                   },
                 ),
                 ListTile(
@@ -123,6 +140,22 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 },
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Container(
+                margin: EdgeInsets.all(10),
+                child: FutureBuilder<PackageInfo>(
+                  future: PackageInfo.fromPlatform(),
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.connectionState == ConnectionState.done
+                          ? 'v${snapshot.data.version}'
+                          : 'v*.*.*',
+                    );
+                  },
+                ),
               ),
             ),
           ],
