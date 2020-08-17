@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:apklis_api/apklis_api.dart';
 import 'package:apklis_api/models/apklis_item_model.dart';
 import 'package:apklis_api/models/apklis_model.dart';
+import 'package:app_review/app_review.dart';
 import 'package:cubaopenplay/src/api/api.dart';
 import 'package:cubaopenplay/src/repositories/repositories.dart';
 import 'package:cubaopenplay/src/utils/utils.dart';
@@ -58,6 +59,7 @@ class AppsBloc extends IAppsBloc {
       if (result.isOk) {
         result.result.results.sort((a, b) => a.name.compareTo(b.name));
         DataManager.cacheModel = result.result;
+        AppReview.requestReview.then((value) => log('requestReview: $value'));
         yield CorrectAppsState(result.result.results);
       } else {
         throw Exception(result.error);

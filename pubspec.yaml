@@ -3,7 +3,7 @@ description: Application store implemented on the Cuban platform Apklis to promo
 
 publish_to: 'none'
 
-version: 0.0.2+2
+version: 0.0.3+3
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -33,6 +33,7 @@ dependencies:
   cached_network_image: ^2.2.0+1
   package_info: ^0.4.1
   font_awesome_flutter: ^8.8.1
+  app_review: ^2.0.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.5
