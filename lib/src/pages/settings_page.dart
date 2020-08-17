@@ -1,7 +1,5 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
-import 'package:cubaopenplay/src/utils/app_theme.dart';
-import 'package:cubaopenplay/src/utils/data_manager.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cubaopenplay/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -42,7 +40,12 @@ class SettingsPage extends StatelessWidget {
                     trailing: Radio(
                       value: AppThemeType.light,
                       groupValue: DataManager.appTheme,
-                      onChanged: (_) {},
+                      onChanged: (value) {
+                        DataManager.appTheme = value;
+                        ThemeSwitcher.of(context).changeTheme(
+                          theme: DataManager.appTheme.theme,
+                        );
+                      },
                     ),
                     onTap: () {
                       DataManager.appTheme = AppThemeType.light;
@@ -69,7 +72,12 @@ class SettingsPage extends StatelessWidget {
                     trailing: Radio(
                       value: AppThemeType.dark,
                       groupValue: DataManager.appTheme,
-                      onChanged: (_) {},
+                      onChanged: (value) {
+                        DataManager.appTheme = value;
+                        ThemeSwitcher.of(context).changeTheme(
+                          theme: DataManager.appTheme.theme,
+                        );
+                      },
                     ),
                     onTap: () {
                       DataManager.appTheme = AppThemeType.dark;
