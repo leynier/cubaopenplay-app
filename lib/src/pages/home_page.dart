@@ -9,6 +9,7 @@ import 'package:cubaopenplay/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:share/share.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatelessWidget {
@@ -45,6 +46,20 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 ListTile(
+                  title: Text('Configuraciones'),
+                  leading: Icon(Icons.settings),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SettingsPage(),
+                      ),
+                    );
+                  },
+                ),
+                Divider(),
+                ListTile(
                   title: Text('Donar'),
                   leading: Icon(Icons.card_giftcard),
                   onTap: () {
@@ -58,14 +73,29 @@ class HomePage extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text('Configuraciones'),
-                  leading: Icon(Icons.settings),
+                  title: Text('Compatir'),
+                  leading: Icon(Icons.share),
+                  onTap: () {
+                    Share.share(
+                      'Cuba Open Play es un proyecto para divulgar e '
+                      'insentivar el desarrollo de aplicaciones cubanas de '
+                      'código abierto.'
+                      '\n\n'
+                      'Apklis: https://www.apklis.cu/application/com.codestrange.cubaopenplay'
+                      '\n\n'
+                      'Play Store: https://play.google.com/store/apps/details?id=com.codestrange.cubaopenplay',
+                    );
+                  },
+                ),
+                ListTile(
+                  title: Text('Acerca de'),
+                  leading: Icon(Icons.info),
                   onTap: () {
                     Navigator.of(context).pop();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SettingsPage(),
+                        builder: (context) => AboutPage(),
                       ),
                     );
                   },

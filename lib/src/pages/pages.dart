@@ -1,3 +1,4 @@
+export 'about_page.dart';
 export 'details_page.dart';
 export 'donate_page.dart';
 export 'gallery_view.dart';
